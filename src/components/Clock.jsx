@@ -1,7 +1,9 @@
-import React from "react";
-import "../App.css";
+import React, {Component, Fragment} from "react";
+import moment from 'moment';
+import 'moment-timezone';
 
-class Clock extends React.Component {
+class Clock extends Component {
+
     constructor(props) {
         super(props);
         this.state = {date: new Date()};
@@ -16,8 +18,14 @@ class Clock extends React.Component {
     }
 
     render() {
-        return <div>Il est {this.state.date.toLocaleTimeString()}</div>
+        return (
+            <Fragment>
+                <h3>{this.props.city}</h3>
+                <div>Il est {moment(this.state.date).tz(this.props.timezone).format('H:mm:ss')}</div>
+            </Fragment>
+        );
     }
+
 }
 
 export default Clock;
